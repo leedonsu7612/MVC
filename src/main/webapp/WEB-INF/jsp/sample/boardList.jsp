@@ -22,6 +22,7 @@ function categoryChange(e) {
 	 
  	  for (z in d) {
 	    var opt = document.createElement("option");
+	    console.log(opt);
 	    opt.value = d[z];
 	    opt.innerHTML = d[z];
 	    target.appendChild(opt);
