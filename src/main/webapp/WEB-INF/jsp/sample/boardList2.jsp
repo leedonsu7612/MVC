@@ -98,12 +98,12 @@ function moveItem(arg){
 
 function add(){
 
-//	var f=document.forms[1]; // 숫자 1은 폼이 존재하는 순서에 따른 값을 넣어줬다. 2번째 있는 form에 적용하기 위해 1. 첫번째가 0부터 시작이다.
+	var f=document.aa;//폼선언
+   
 
-     var f=document.descForm.value;
-	var v=f.insname.value;
+	var rv=f.tt.value;
 
-	if(! v){
+	if(! rv){
 
 		return;
 
@@ -112,12 +112,12 @@ function add(){
 	
 
 	var idx=f.sel.options.length;  // 현재 옵션의 갯수를 구한다.
-
-	f.sel[idx]=new Option(":"+v+":",v); // text(우리가 보는 텍스트), value(들어갈 데이터)
+	
+	f.sel[idx]=new Option(":::: "+rv+"<<<<<<<",rv); // text(우리가 보는 텍스트), value(들어갈 데이터)
 
 //	f.sel[idx]=new Option(v,v); //text, value
 
-	f.ff.value="";
+	f.tt.value="";
 
 	return;
 
@@ -126,7 +126,7 @@ function add(){
 
 function del(){
 
-	var f=document.forms[1];
+	var f=document.aa;
 
 	if(! f.sel.value){ // 선택된것이 없으면
 
@@ -139,6 +139,7 @@ function del(){
 	if(confirm(f.sel.value+"항목을 지우시겠습까?")){
 
 		f.sel[f.sel.selectedIndex] = null; //   selectedIndex 선택항목 인덱스
+		console.log(f.sel.selectedIndex);  //없으면 -1
 
 	}
 
@@ -154,7 +155,7 @@ function del(){
 
 <!-- 실행과 동시에 적용(init()메소드를 호출) -->
 
-<form name="searchform"action="">
+<form action="">
 
 <table>
 
@@ -192,11 +193,11 @@ function del(){
 
 <br/><br/>
 
-<form name="descForm" action="">
+<form  name="aa" action="">
 
 	<select name="sel"></select><br/>
 
-	<input type="text" name="insname">
+	<input type="text" name="tt">
 
 	<input type="button" onclick="add();" value="추가">  <!-- 추가버튼 누르면 add() 메소드를 부른다 -->
 

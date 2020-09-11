@@ -1,211 +1,85 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-
+<!DOCTYPE html>
 <html>
-
 <head>
-
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
-<title>Insert title here</title>
-
-
-<script type="text/javascript">
-
-// 데이터 삽입
-
-function init(){
-
-	var f=document.forms[0]; // 폼의 배열 순서대로 숫자를 넣어줘야 한다. 0부터
-
-	f.s1[0]=new Option("홍길동","길동"); // text(우리가 보는 텍스트), value(들어갈 데이터)
-
-	f.s1[1]=new Option("이순신","순신");
-
-	f.s1[2]=new Option("강갑찬","갑찬");
-
-	f.s1[3]=new Option("한가인","가인");
-
-	f.s1[4]=new Option("장동건","동건");
-
-	f.s1[5]=new Option("고소영","소영");
-
-}
-
-
-function moveItem(arg){
-
-	var f=document.forms[0];
-
-	var source, target;
-
-	if(arg=="left" || arg=="leftAll"){    // left 혹은 leftAll을 선택 했을 경우 source가 s2가 되고 target이 s1이 된다.
-
-		source=f.s2;                
-
-		target=f.s1;
-
-	}else{                                // right혹은 rightAll을 선택 했을 경우 source가 s1가 되고 target이 s2이 된다.
-
-		source=f.s1;
-
-		target=f.s2;
-
+<title>first</title>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+</head>
+<script >
+function categoryChange(e) {
+	  var good_a = ["지수", "제니", "로제", "리사"];
+	  var good_b = ["빅토리아", "엠버", "루나", "크리스탈"];
+	  var good_c = ["LE", "하니", "정화", "혜린", "솔지"];
+	  var target = document.getElementById("good");
+	 
+	  if(e.value == "a") var d = good_a;
+	  else if(e.value == "b") var d = good_b;
+	  else if(e.value == "c") var d = good_c;
+	 
+	  target.options.length = "";
+	  console.log(target.options.length);
+	 
+ 	  for (z in d) {
+	    var opt = document.createElement("option");
+	    opt.value = d[z];
+	    opt.innerHTML = d[z];
+	    target.appendChild(opt);
+	  }  
 	}
 
-	
-
-	var n=target.options.length;  // 선택한 갯수를 n값에 담는다.
-
-	if(arg=="leftAll" || arg=="rightAll"){     // rightAll 혹은 leftAll을 선택 했을 경우
-
-		for(var i=source.options.length-1; i>=0; i--){
-
-			target[n++]=new Option(source[0].text,source[0].value);
-
-			source[0]=null;
-
-		}
-
-		return;
-
-	}
-
-	
-
-	// left, right 선택시에 작동하는 함수
-
-	var len=source.options.length;
-
-	for(var i=0; i<len; i++){
-
-		if(source.options[i].selected){    // 해당값이 선택되어 있다면 source에 있는 값들을 target배열에 대입한다.
-
-			target[n++]=new Option(source[i].text,source[i].value);
-
-			source[i]=null;                    // target에 값을 대입한 source배열의 데이터는 null로 바꾸어 없앤다.
-
-			len--;                                // 이동한 데이터가 순서대로 정렬하기 위한 작업
-
-			i--;
-
-		}
-
-	}
-
-}
-
-
-function add(){
-
-	var f=document.aa;//폼선언
-   
-
-	var rv=f.tt.value;
-
-	if(! rv){
-
-		return;
-
-	}
-
-	
-
-	var idx=f.sel.options.length;  // 현재 옵션의 갯수를 구한다.
-	
-	f.sel[idx]=new Option(":::: "+rv+"<<<<<<<",rv); // text(우리가 보는 텍스트), value(들어갈 데이터)
-
-//	f.sel[idx]=new Option(v,v); //text, value
-
-	f.tt.value="";
-
-	return;
-
-}
-
-
-function del(){
-
-	var f=document.aa;
-
-	if(! f.sel.value){ // 선택된것이 없으면
-
-		return;
-
-	}
-
-	
-
-	if(confirm(f.sel.value+"항목을 지우시겠습까?")){
-
-		f.sel[f.sel.selectedIndex] = null; //   selectedIndex 선택항목 인덱스
-		console.log(f.sel.selectedIndex);  //없으면 -1
-
-	}
-
-}
-
-	
 
 </script>
-
-</head>
-
-<body onload="init();"> 
-
-<!-- 실행과 동시에 적용(init()메소드를 호출) -->
-
-<form action="">
-
-<table>
-
-<tr>
-
-	<td>
-
-		<select name="s1" multiple="multiple" style="width: 200px; height: 150px;"></select>
-
-	</td>
-
-	<td>
-
-		<input type="button" value=">" onclick="moveItem('right');"><br/>
-
-		<input type="button" value=">>" onclick="moveItem('rightAll');"><br/>
-
-		<input type="button" value="<" onclick="moveItem('left');"><br/>
-
-		<input type="button" value="<<" onclick="moveItem('leftAll');"><br/>
-
-	</td>
-
-	<td>
-
-		<select name="s2" multiple="multiple" style="width: 200px; height: 150px;"></select>
-
-	</td>
-
-</tr>
-
+<body>
+<h2>게시판 목록</h2>
+<table style="border:1px solid #ccc">
+	<colgroup>
+		<col width="40%"/>
+		<col width="40"/>
+		<col width="40%"/>
+		<col width="40%"/>
+	</colgroup>
+	<thead>
+		<tr>
+			<th scope="col">글번호</th>
+			<th scope="col">제목</th>
+			<th scope="col">조회수</th>
+			<th scope="col">작성일</th>
+		</tr>
+	</thead>
+	<tbody>
+		<c:choose>
+			<c:when test="${fn:length(list) > 0}">
+				<c:forEach items="${list }" var="row">
+					<tr>
+						<td>${row.IDX }</td>
+						<td>${row.TITLE }</td>
+						<td>${row.HIT_CNT }</td>
+						<td>${row.CREA_DTM }</td>
+					</tr>
+				</c:forEach>
+			</c:when>
+			<c:otherwise>
+				<tr>
+					<td colspan="9">조회된 결과가 없습니다.</td>
+				</tr>
+			</c:otherwise>
+		</c:choose>
+		
+	</tbody>
 </table>
+<select onchange="categoryChange(this)">
+  <option>걸그룹을 선택해주세요</option>
+  <option value="a">블랙핑크</option>
+  <option value="b">에프엑스</option>
+  <option value="c">EXID</option>
+</select>
+ 
+<select id="good">
+<option>좋아하는 멤버를 선택해주세요</option>
+</select>
 
-</form>
-
-<br/><br/>
-
-<form  name="aa" action="">
-
-	<select name="sel"></select><br/>
-
-	<input type="text" name="tt">
-
-	<input type="button" onclick="add();" value="추가">  <!-- 추가버튼 누르면 add() 메소드를 부른다 -->
-
-	<input type="button" onclick="del();" value="삭제">
-
-</form>
 
 
 </body>
-
 </html>
