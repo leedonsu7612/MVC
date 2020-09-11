@@ -98,9 +98,10 @@ function moveItem(arg){
 
 function add(){
 
-	var f=document.forms[1]; // 숫자 1은 폼이 존재하는 순서에 따른 값을 넣어줬다. 2번째 있는 form에 적용하기 위해 1. 첫번째가 0부터 시작이다.
+//	var f=document.forms[1]; // 숫자 1은 폼이 존재하는 순서에 따른 값을 넣어줬다. 2번째 있는 form에 적용하기 위해 1. 첫번째가 0부터 시작이다.
 
-	var v=f.tt.value;
+     var f=document.descForm.value;
+	var v=f.insname.value;
 
 	if(! v){
 
@@ -153,7 +154,7 @@ function del(){
 
 <!-- 실행과 동시에 적용(init()메소드를 호출) -->
 
-<form action="">
+<form name="searchform"action="">
 
 <table>
 
@@ -191,11 +192,11 @@ function del(){
 
 <br/><br/>
 
-<form action="">
+<form name="descForm" action="">
 
 	<select name="sel"></select><br/>
 
-	<input type="text" name="tt">
+	<input type="text" name="insname">
 
 	<input type="button" onclick="add();" value="추가">  <!-- 추가버튼 누르면 add() 메소드를 부른다 -->
 
